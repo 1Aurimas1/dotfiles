@@ -1,0 +1,36 @@
+!URxvt.font: xft:Source Code Pro:size=13,xft:Sauce Code Pro Nerd Font Complete:size=13
+!URxvt.font: xft:Sauce Code Pro Nerd Font Complete:size=13
+!URxvt.font: xft:fa-regular-400.ttf:size=13
+URxvt.scrollBar: false
+XTerm.termName: xterm-256color
+!URxvt.letterSpace: 20
+!*.font: xft:Source\ Code\ Pro:pixelsize=13:minspace=False,xft:DejaVu\ Sans:pixelsize=14
+!*.boldFont: xft:Source\ Code\ Pro:pixelsize=13:minspace=False,xft:DejaVu\ Sans:pixelsize=14
+!*.letterSpace: 10
+!*.font: xft:Source\ Code\ Pro\ for\ Powerline:size=13:minspace=False,xft:DejaVu Sans Mono for Powerline:pixelsize=14
+
+!URxvt.font: xft:Source Code Pro:size=13,xft:DejaVu Sans Mono for Powerline:pixelsize=23
+!URxvt.font: xft:Source Code Pro:size=13,xft:DejaVu Sans Mono for Powerline:size=15
+URxvt.font: xft:Source Code Pro:size=11,xft:MesloLGS NF:size=11
+!URxvt.font: xft:LiberationMono:size=11,xft:MesloLGS NF:size=11
+!xft:DejaVu Sans Mono for Powerline
+!*.boldFont: xft:Source\ Code\ Pro\ Bold\ for\ Powerline:pixelsize=13:minspace=False,xft:DejaVu\ Sans:pixelsize=14
+!URxvt*background: #ff0000
+URxvt*saveLines: 10000
+!URxvt*scrollTtyOutput: false
+!URxvt*scrollWithBuffer: true
+!URxvt*scrollTtyKeypress: true
+
+!Fake transparency
+!URxvt.inheritPixmap: true
+urxvt*transparent: true
+urxvt*shading: 30
+!redish
+!URxvt.tintColor: #f09090
+URxvt.tintColor: #E7B080
+!True transparency
+!urxvt*depth: 32
+!URxvt*background: rgba:0000/0000/ff00/00ff
+
+#include "./Xresources-themes/pop_os.Xresources"
+!urxvt*blurRadius: 5
