@@ -1,9 +1,6 @@
 require("plugins")
 require("set")
 
---require'lspconfig'.tsserver.setup{}
-
--- Aesthetic
 -- pcall catches errors if the plugin doesn't load
 local ok, gruvbox = pcall(require, "gruvbox")
 if not ok then return end
@@ -112,14 +109,28 @@ local function config(_config)
 		end,
 	}, _config or {})
 end
-require("lspconfig").tsserver.setup(config())
+
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+--require("lspconfig").tsserver.setup(config())
 --require'lspconfig'.tsserver.setup{}
 vim.g.neoformat_try_node_exe = 1
+require'lspconfig'.tsserver.setup(config({
+    root_dir = lspconfig.util.root_pattern("package.json"),
+}))
+require('lspconfig').denols.setup(config({
+    root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+}))
+
 require("lspconfig").gopls.setup(config())
 require("lspconfig").clangd.setup(config())
 --require("lspconfig").ccls.setup(config())
 --require("lspconfig").sumneko_lua.setup(config())
-require("lspconfig").bashls.setup(config())
+--require("lspconfig").bashls.setup(config())
 require("lspconfig").pyright.setup(config())
 
 require'nvim-treesitter.configs'.setup {

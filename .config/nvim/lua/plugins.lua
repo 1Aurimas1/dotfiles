@@ -11,6 +11,10 @@ return require('packer').startup(function(use)
   use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   use {'catppuccin/nvim', as = 'catppuccin'}
   use { "ellisonleao/gruvbox.nvim", as = 'gruvbox'}
+  use {
+      'nvim-telescope/telescope.nvim', tag = '0.1.0',
+      requires = { {'nvim-lua/plenary.nvim'} }
+  }
     --use("hrsh7th/cmp-buffer")
   
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
