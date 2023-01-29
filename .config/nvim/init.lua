@@ -132,6 +132,7 @@ require("lspconfig").clangd.setup(config())
 --require("lspconfig").sumneko_lua.setup(config())
 --require("lspconfig").bashls.setup(config())
 require("lspconfig").pyright.setup(config())
+require("lspconfig").solargraph.setup(config())
 
 require'nvim-treesitter.configs'.setup {
   --ensure_installed = "all",
@@ -142,3 +143,18 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
+local yank_group = augroup('HighlightYank', {})
+
+autocmd('TextYankPost', {
+    group = yank_group,
+    pattern = '*',
+    callback = function()
+        vim.highlight.on_yank({
+            higroup = 'IncSearch',
+            timeout = 40,
+        })
+    end,
+})
