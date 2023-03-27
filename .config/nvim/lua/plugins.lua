@@ -15,6 +15,10 @@ return require('packer').startup(function(use)
       'nvim-telescope/telescope.nvim', tag = '0.1.0',
       requires = { {'nvim-lua/plenary.nvim'} }
   }
+  use("theprimeagen/refactoring.nvim")
+  use("theprimeagen/harpoon")
+  use("mbbill/undotree")
+  use("nvim-treesitter/nvim-treesitter-context");
     --use("hrsh7th/cmp-buffer")
   
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
@@ -22,6 +26,7 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
   use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then

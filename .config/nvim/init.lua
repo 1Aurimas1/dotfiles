@@ -18,7 +18,8 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 local lspconfig = require('lspconfig')
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver' }
+--local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver' }
+local servers = { 'clangd', 'pyright', 'tsserver' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     -- on_attach = my_custom_on_attach,
@@ -133,6 +134,25 @@ require("lspconfig").clangd.setup(config())
 --require("lspconfig").bashls.setup(config())
 require("lspconfig").pyright.setup(config())
 require("lspconfig").solargraph.setup(config())
+require'lspconfig'.rust_analyzer.setup(config({
+  settings = {
+    ['rust-analyzer'] = {
+      diagnostics = {
+        enable = true;
+      }
+    }
+  }
+}))
+--require'lspconfig'.rust_analyzer.setup{
+--  settings = {
+--    ['rust-analyzer'] = {
+--      diagnostics = {
+--        enable = false;
+--      }
+--    }
+--  }
+--}
+--require'lspconfig'.rust_analyzer.setup(config())
 
 require'nvim-treesitter.configs'.setup {
   --ensure_installed = "all",
@@ -143,6 +163,8 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
@@ -157,4 +179,27 @@ autocmd('TextYankPost', {
             timeout = 40,
         })
     end,
+})
+
+local mark = require("harpoon.mark")
+local ui = require("harpoon.ui")
+
+vim.keymap.set("n", "<leader>a", mark.add_file)
+vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
+
+vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
+vim.keymap.set("n", "<C-j>", function() ui.nav_file(2) end)
+vim.keymap.set("n", "<C-k>", function() ui.nav_file(3) end)
+vim.keymap.set("n", "<C-l>", function() ui.nav_file(4) end)
+
+-- prompt for a refactor to apply when the remap is triggered
+vim.api.nvim_set_keymap(
+    "v",
+    "<leader>rr",
+    ":lua require('refactoring').select_refactor()<CR>",
+    { noremap = true, silent = true, expr = false }
+)
+
+vim.diagnostic.config({
+    virtual_text = true
 })

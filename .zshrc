@@ -89,6 +89,7 @@ source $ZSH/oh-my-zsh.sh
 # fi
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.deno/bin:$PATH
+source $ZSH/oh-my-zsh.sh
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
