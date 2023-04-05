@@ -90,6 +90,8 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.deno/bin:$PATH
 source $ZSH/oh-my-zsh.sh
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/share/doc/fzf/examples/completion.zsh
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
