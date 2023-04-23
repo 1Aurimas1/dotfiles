@@ -10,6 +10,7 @@ vim.cmd[[hi! Normal ctermbg=None guibg=None]]
 vim.g.gruvbox_contrast_dark = 'hard'
 vim.g.gruvbox_invert_selection = '0'
 
+vim.g.netrw_bufsettings = 'noma nomod nu nowrap ro nobl'
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
