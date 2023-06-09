@@ -182,6 +182,14 @@ autocmd('TextYankPost', {
     end,
 })
 
+vim.g.clipboard = {
+    name = 'WslClipboard',
+    copy =  { ["+"] = { "clip.exe" }, ["*"] = { "clip.exe" } },
+    paste = { ["+"] = { "powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace(\"`r\", \"\"))" }, 
+    ["*"] = { "powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace(\"`r\", \"\"))" } },
+    cache_enabled = false
+}
+
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
 
