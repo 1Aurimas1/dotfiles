@@ -33,7 +33,7 @@ vim.opt.scrolloff = 8
 
 -- Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 -- delays and poor user experience.
---vim.opt.updatetime = 50
+vim.opt.updatetime = 750
 
 -- Don't pass messages to |ins-completion-menu|.
 --vim.opt.shortmess:append("c")
