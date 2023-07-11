@@ -127,11 +127,36 @@ require'lspconfig'.tsserver.setup(config({
 require('lspconfig').denols.setup(config({
     root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
 }))
+require'lspconfig'.volar.setup(config())
+require'lspconfig'.tailwindcss.setup(config())
 
 require("lspconfig").gopls.setup(config())
 require("lspconfig").clangd.setup(config())
 --require("lspconfig").ccls.setup(config())
 --require("lspconfig").sumneko_lua.setup(config())
+require'lspconfig'.lua_ls.setup(config(
+{
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+}))
 --require("lspconfig").bashls.setup(config())
 require("lspconfig").pyright.setup(config())
 require("lspconfig").solargraph.setup(config())
@@ -154,6 +179,21 @@ require'lspconfig'.rust_analyzer.setup(config({
 --  }
 --}
 --require'lspconfig'.rust_analyzer.setup(config())
+local function format_local()
+    local currentBuffer = vim.api.nvim_get_current_buf()
+    local filePath = vim.api.nvim_buf_get_name(currentBuffer)
+    local currentDir = vim.fn.getcwd()
+
+    local relativeProjectPath = string.gsub(filePath, "^" .. currentDir, "")
+    local dirEndIdx = string.find(relativeProjectPath, "/", 2)
+    local rootDir = string.sub(relativeProjectPath, 0, dirEndIdx)
+
+    vim.fn.chdir("." .. rootDir)
+    vim.api.nvim_command("Neoformat")
+    vim.fn.chdir(currentDir)
+end
+
+vim.keymap.set('n', '<leader>fl', format_local, { })
 
 require'nvim-treesitter.configs'.setup {
   --ensure_installed = "all",
