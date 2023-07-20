@@ -26,11 +26,34 @@ return require('packer').startup(function(use)
     use("nvim-treesitter/nvim-treesitter-context");
     --use("hrsh7th/cmp-buffer")
 
-    use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
-    use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
-    use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
-    use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
-    use 'L3MON4D3/LuaSnip' -- Snippets plugin
+    --use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
+    --use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
+    --use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
+    --use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
+    --use 'L3MON4D3/LuaSnip' -- Snippets plugin
+
+    use {
+        'VonHeikemen/lsp-zero.nvim',
+        branch = 'v1.x',
+        requires = {
+            -- LSP Support
+            {'neovim/nvim-lspconfig'},
+            {'williamboman/mason.nvim'},
+            {'williamboman/mason-lspconfig.nvim'},
+
+            -- Autocompletion
+            {'hrsh7th/nvim-cmp'},
+            {'hrsh7th/cmp-buffer'},
+            {'hrsh7th/cmp-path'},
+            {'saadparwaiz1/cmp_luasnip'},
+            {'hrsh7th/cmp-nvim-lsp'},
+            {'hrsh7th/cmp-nvim-lua'},
+
+            -- Snippets
+            {'L3MON4D3/LuaSnip'},
+            {'rafamadriz/friendly-snippets'},
+        }
+    }
 
     use('ThePrimeagen/vim-be-good');
     use('tpope/vim-fugitive');
