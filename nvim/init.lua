@@ -236,10 +236,14 @@ local ui = require("harpoon.ui")
 vim.keymap.set("n", "<leader>a", mark.add_file)
 vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
 
-vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
-vim.keymap.set("n", "<C-j>", function() ui.nav_file(2) end)
-vim.keymap.set("n", "<C-k>", function() ui.nav_file(3) end)
-vim.keymap.set("n", "<C-l>", function() ui.nav_file(4) end)
+--vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
+--vim.keymap.set("n", "<C-j>", function() ui.nav_file(2) end)
+--vim.keymap.set("n", "<C-k>", function() ui.nav_file(3) end)
+--vim.keymap.set("n", "<C-l>", function() ui.nav_file(4) end)
+
+for i = 1, 4 do
+    vim.keymap.set("n", string.format("<leader>%s", i), function() ui.nav_file(i) end)
+end
 
 -- prompt for a refactor to apply when the remap is triggered
 vim.api.nvim_set_keymap(
@@ -249,9 +253,9 @@ vim.api.nvim_set_keymap(
     { noremap = true, silent = true, expr = false }
 )
 
---vim.diagnostic.config({
---    virtual_text = true
---})
+vim.diagnostic.config({
+    virtual_text = true
+})
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -270,9 +274,14 @@ vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
-vim.keymap.set("n", "<C-Up>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-Down>", "<cmd>cprev<CR>zz")
-vim.keymap.set("n", "<leader><Up>", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader><Down>", "<cmd>lprev<CR>zz")
+vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
+vim.keymap.set("n", "<leader>j", "<cmd>lnext<CR>zz")
+vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>zz")
+
+--vim.keymap.set("n", "<C-Up>", "<cmd>cnext<CR>zz")
+--vim.keymap.set("n", "<C-Down>", "<cmd>cprev<CR>zz")
+--vim.keymap.set("n", "<leader><Up>", "<cmd>lnext<CR>zz")
+--vim.keymap.set("n", "<leader><Down>", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<PageUp>", "<cmd>bprevious<CR>zz")
 vim.keymap.set("n", "<PageDown>", "<cmd>bnext<CR>zz")
