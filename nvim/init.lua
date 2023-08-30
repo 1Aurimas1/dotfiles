@@ -181,14 +181,25 @@ vim.g.neoformat_try_node_exe = 1
 --require'lspconfig'.rust_analyzer.setup(config())
 local function format_local()
     local currentBuffer = vim.api.nvim_get_current_buf()
-    local filePath = vim.api.nvim_buf_get_name(currentBuffer)
+    local currentFilePath = vim.api.nvim_buf_get_name(currentBuffer)
     local currentDir = vim.fn.getcwd()
 
-    local relativeProjectPath = string.gsub(filePath, "^" .. currentDir, "")
-    local dirEndIdx = string.find(relativeProjectPath, "/", 2)
-    local rootDir = string.sub(relativeProjectPath, 0, dirEndIdx)
+    --local relativeProjectPath = string.gsub(filePath, "^" .. currentDir, "") // doesnt work with '-' in path
+    --local relativeProjectPath = string.gsub(filePath, "home", "")
+    --for c in currentFilePath:gmatch"." do
+    --    currentDir:sub(1, 1)
 
-    vim.fn.chdir("." .. rootDir)
+    --end
+
+    --local dirEndIdx = string.find(relativeProjectPath, "/", 2)
+    local dirEndIdx = string.find(currentFilePath, "/", currentDir:len() + 2)
+    --local rootDir = string.sub(relativeProjectPath, 0, dirEndIdx)
+    local rootDir = string.sub(currentFilePath, 0, dirEndIdx)
+    --print(filePath, currentDir, relativeProjectPath)
+    --print(rootDir)
+
+    --vim.fn.chdir("." .. rootDir)
+    vim.fn.chdir(rootDir)
     vim.api.nvim_command("Neoformat")
     vim.fn.chdir(currentDir)
 end
